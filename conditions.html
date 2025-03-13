@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions d'utilisation - Kaso</title>
+    <style>
+        :root {
+            --bg-color: #0d0a14;
+            --text-color: #ffffff;
+            --accent-color: #7c5cff;
+            --secondary-bg: #141020;
+            --button-color: #7c5cff;
+            --button-text: #ffffff;
+            --hover-color: #9879ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(124, 92, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .connect-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .connect-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 6rem auto 2rem;
+            padding: 2rem 3rem;
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .content-header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .content-header p {
+            color: #b8b8b8;
+        }
+
+        .terms-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .terms-section h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(124, 92, 255, 0.3);
+        }
+
+        .terms-section p, .terms-section ul {
+            margin-bottom: 1rem;
+        }
+
+        .terms-section ul {
+            padding-left: 1.5rem;
+        }
+
+        .terms-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .date-updated {
+            text-align: center;
+            margin-top: 3rem;
+            color: #b8b8b8;
+            font-style: italic;
+        }
+
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(124, 92, 255, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: #b8b8b8;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-text">Kaso</span>
+        </div>
+        <div class="nav-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+        </div>
+        <button class="connect-btn">
+            <svg width="20" height="20" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+            </svg>
+            Se connecter
+        </button>
+    </nav>
+
+    <div class="content-container">
+        <div class="content-header">
+            <h1>Conditions d'utilisation</h1>
+            <p>Veuillez lire attentivement ces conditions avant d'utiliser nos services.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>1. Acceptation des conditions</h2>
+            <p>En accédant et en utilisant le service Kaso, vous acceptez de respecter et d'être lié par les présentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, vous ne devez pas utiliser notre service.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>2. Description du service</h2>
+            <p>Kaso est une communauté en ligne qui propose différents services, notamment :</p>
+            <ul>
+                <li>Une plateforme de discussion et d'échange</li>
+                <li>Des événements communautaires exclusifs</li>
+                <li>Un programme de soutien avec différents niveaux d'avantages</li>
+                <li>Des fonctionnalités spéciales pour les membres premium</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>3. Comptes et inscription</h2>
+            <p>Pour accéder à certaines fonctionnalités du service, vous devrez créer un compte. Vous êtes responsable du maintien de la confidentialité de vos identifiants et de toutes les activités qui se produisent sous votre compte.</p>
+            <p>Vous vous engagez à :</p>
+            <ul>
+                <li>Fournir des informations exactes, actuelles et complètes lors de l'inscription</li>
+                <li>Maintenir et mettre à jour rapidement vos informations</li>
+                <li>Protéger la sécurité de votre compte</li>
+                <li>Nous informer immédiatement de toute utilisation non autorisée de votre compte</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>4. Paiements et abonnements</h2>
+            <p>Si vous choisissez de vous abonner à l'un de nos forfaits premium :</p>
+            <ul>
+                <li>Vous acceptez de payer tous les frais associés à votre niveau d'abonnement</li>
+                <li>Les abonnements sont renouvelés automatiquement, sauf si vous les annulez avant la date de renouvellement</li>
+                <li>Les modalités de remboursement sont détaillées dans notre politique de remboursement</li>
+                <li>Nous nous réservons le droit de modifier les tarifs avec un préavis raisonnable</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>5. Règles de conduite</h2>
+            <p>En utilisant notre service, vous acceptez de ne pas :</p>
+            <ul>
+                <li>Publier du contenu illégal, offensant, nuisible, menaçant, abusif, harcelant, diffamatoire ou autrement répréhensible</li>
+                <li>Usurper l'identité d'une autre personne ou entité</li>
+                <li>Utiliser le service pour envoyer des spams ou des publicités non sollicitées</li>
+                <li>Tenter de contourner les mesures de sécurité ou d'accéder à des zones non autorisées du service</li>
+                <li>Perturber le fonctionnement normal du service</li>
+            </ul>
+        </div>
+
+        <div class="terms-section">
+            <h2>6. Droits de propriété intellectuelle</h2>
+            <p>Le service et son contenu original, fonctionnalités et fonctionnalités sont et resteront la propriété exclusive de Kaso. Le service est protégé par le droit d'auteur, les marques de commerce et d'autres lois en France et à l'étranger.</p>
+            <p>Notre marque, logo, et habillage commercial ne peuvent pas être utilisés sans notre autorisation écrite préalable.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>7. Résiliation</h2>
+            <p>Nous nous réservons le droit de suspendre ou de résilier votre compte et votre accès au service, avec ou sans préavis, pour quelque raison que ce soit, y compris, sans limitation, si vous violez ces conditions d'utilisation.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>8. Limitation de responsabilité</h2>
+            <p>En aucun cas, Kaso, ses administrateurs, employés ou agents ne seront responsables de tout dommage direct, indirect, accessoire, spécial, consécutif ou punitif découlant de votre utilisation ou de votre incapacité à utiliser le service.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>9. Modifications des conditions</h2>
+            <p>Nous nous réservons le droit de modifier ou de remplacer ces conditions à tout moment. Il est de votre responsabilité de vérifier périodiquement les modifications. Votre utilisation continue du service après la publication des conditions révisées signifie que vous acceptez et consentez aux modifications.</p>
+        </div>
+
+        <div class="terms-section">
+            <h2>10. Loi applicable</h2>
+            <p>Ces conditions sont régies et interprétées conformément aux lois françaises, sans égard aux principes de conflits de lois.</p>
+            <p>Tout litige découlant de ces conditions sera soumis à la juridiction exclusive des tribunaux de Paris, France.</p>
+        </div>
+
+        <div class="date-updated">
+            Dernière mise à jour : 12 mars 2025
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+            <a href="conditions.html">Conditions d'utilisation</a>
+            <a href="confidentialite.html">Confidentialité</a>
+        </div>
+        <p class="copyright">&copy; 2025 Kaso. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Button hover effects
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    button.style.transform = 'scale(1.05)';
+                    button.style.transition = 'all 0.3s';
+                });
+                
+                button.addEventListener('mouseout', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

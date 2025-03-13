@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - Kaso</title>
+    <style>
+        :root {
+            --bg-color: #0d0a14;
+            --text-color: #ffffff;
+            --accent-color: #7c5cff;
+            --secondary-bg: #141020;
+            --button-color: #7c5cff;
+            --button-text: #ffffff;
+            --hover-color: #9879ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(124, 92, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .connect-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .connect-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .payment-container {
+            max-width: 800px;
+            margin: 6rem auto 2rem;
+            padding: 2rem;
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .payment-header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .payment-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            background-color: rgba(124, 92, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid rgba(124, 92, 255, 0.2);
+        }
+
+        .tier-details {
+            flex: 1;
+        }
+
+        .price-details {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #b8b8b8;
+        }
+
+        .form-group input, .form-group select {
+            padding: 0.8rem;
+            border-radius: 4px;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            background-color: rgba(20, 16, 32, 0.6);
+            color: white;
+            font-family: inherit;
+        }
+
+        .card-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .pay-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .pay-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(124, 92, 255, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .card-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(124, 92, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(124, 92, 255, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(124, 92, 255, 0.3);
+            }
+        }
+
+        .payment-container {
+            animation: glow 3s infinite;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background-color: rgba(20, 16, 32, 0.8);
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            background-color: rgba(124, 92, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.3);
+        }
+
+        .payment-method.active {
+            background-color: rgba(124, 92, 255, 0.2);
+            border: 2px solid var(--accent-color);
+        }
+
+        .payment-method img {
+            height: 40px;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-form-section {
+            display: none;
+        }
+
+        .payment-form-section.active {
+            display: block;
+        }
+
+        .stripe-card-container {
+            padding: 1rem;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            border-radius: 4px;
+            background-color: rgba(20, 16, 32, 0.6);
+        }
+        
+        /* Styles pour les éléments Stripe */
+        .StripeElement {
+            width: 100%;
+            padding: 0.5rem 0;
+        }
+        
+        .StripeElement--focus {
+            border-color: var(--accent-color);
+        }
+        
+        .StripeElement--invalid {
+            border-color: #ff5555;
+        }
+        
+        /* Style pour la liste d'infos */
+        .card-info-helper ul li {
+            margin-bottom: 0.25rem;
+        }
+
+        .error-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .error-modal-content {
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(124, 92, 255, 0.3);
+            text-align: center;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            animation: fadeIn 0.3s;
+        }
+
+        .error-modal-title {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-modal-message {
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .error-modal-btn {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .error-modal-btn:hover {
+            background-color: #9879ff;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error-modal-footer button:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+        }
+
+        /* Styles pour le modal de connexion Discord */
+        .discord-login {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .discord-login.active {
+            display: flex;
+        }
+
+        .discord-login-card {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .discord-login-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .discord-logo {
+            margin-bottom: 1rem;
+        }
+
+        .discord-login-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .discord-login-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .fade-in-down {
+            animation: fadeInDown 0.5s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+            animation-fill-mode: backwards;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+            animation-fill-mode: backwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-text">Kaso</span>
+        </div>
+        <div class="nav-links">
+            <a href="kaso-final.html">Home</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+        </div>
+        <button class="connect-btn" id="connect-btn">
+            <svg width="20" height="20" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+            </svg>
+            Se connecter
+        </button>
+    </nav>
+
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>Finaliser votre paiement</h1>
+            <p>Vous êtes sur le point de soutenir Kaso. Merci pour votre contribution !</p>
+        </div>
+
+        <div class="payment-info">
+            <div class="tier-details">
+                <h3>Forfait sélectionné: <span id="selected-tier">Standard</span></h3>
+                <p>Accès à tous les avantages du forfait pour une durée de 1 mois.</p>
+            </div>
+            <div class="price-details">
+                <h3>Prix total: <span id="selected-price">9.99€</span></h3>
+                <p>Paiement mensuel</p>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <div class="payment-method active" data-method="card">
+                <img src="https://cdn.pixabay.com/photo/2021/12/10/16/38/visa-6860558_1280.png" alt="Carte bancaire">
+                <h3>Carte bancaire</h3>
+                <p>Visa, Mastercard, etc.</p>
+            </div>
+            <div class="payment-method" data-method="paypal">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png" alt="PayPal">
+                <h3>PayPal</h3>
+                <p>Paiement sécurisé</p>
+            </div>
+        </div>
+
+        <div class="payment-form-section active" id="card-form">
+            <form class="payment-form" id="card-payment-form">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" placeholder="Ex: Jean Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Ex: jean.dupont@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Informations de carte</label>
+                    <div id="card-element" class="stripe-card-container">
+                        <!-- L'élément de carte Stripe sera monté ici -->
+                    </div>
+                    <div id="card-errors" class="error-message" style="color: #ff5555; margin-top: 0.5rem; font-size: 0.9rem;"></div>
+                    <div class="card-info-helper" style="margin-top: 0.75rem; color: #b8b8b8; font-size: 0.9rem;">
+                        <p><strong>Informations nécessaires :</strong></p>
+                        <ul style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Numéro de carte (16 chiffres)</li>
+                            <li>Date d'expiration (MM/AA)</li>
+                            <li>Code de sécurité (CVV - 3 chiffres au dos de votre carte)</li>
+                            <li>Nom du titulaire de la carte</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button type="submit" class="pay-btn">Payer avec Stripe</button>
+            </form>
+        </div>
+
+        <div class="payment-form-section" id="paypal-form">
+            <form class="payment-form" id="paypal-payment-form">
+                <div class="form-group">
+                    <label for="paypal-name">Nom complet</label>
+                    <input type="text" id="paypal-name" name="paypal-name" placeholder="Ex: Jean Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label for="paypal-email">Email</label>
+                    <input type="email" id="paypal-email" name="paypal-email" placeholder="Ex: jean.dupont@example.com" required>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <p>Vous allez être redirigé vers PayPal pour finaliser votre paiement.</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png" alt="PayPal" style="height: 60px; margin: 1rem 0;">
+                </div>
+                
+                <button type="submit" class="pay-btn">Payer avec PayPal</button>
+            </form>
+        </div>
+
+        <div class="secure-payment-info">
+            <p style="text-align: center; margin-top: 2rem; color: #b8b8b8;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: middle; margin-right: 5px;">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                </svg>
+                Paiement sécurisé par cryptage SSL. Nous ne stockons jamais vos informations de carte bancaire.
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+            <a href="conditions.html">Conditions d'utilisation</a>
+            <a href="confidentialite.html">Confidentialité</a>
+        </div>
+        <p class="copyright"> 2025 Kaso. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Modal d'erreur personnalisé -->
+    <div class="error-modal" id="errorModal">
+        <div class="error-modal-content">
+            <div class="error-modal-title">Erreur de paiement</div>
+            <div class="error-modal-message" id="errorModalMessage">Une erreur est survenue lors du traitement de votre paiement.</div>
+            <button class="error-modal-btn" onclick="closeErrorModal()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Fenêtre de connexion Discord -->
+    <div class="discord-login" id="discord-login">
+        <div class="discord-login-card">
+            <button class="discord-login-close" id="discord-login-close">×</button>
+            <svg class="discord-logo" width="80" height="80" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#5865F2"/>
+            </svg>
+            <h2 class="fade-in-down">Connexion avec Discord</h2>
+            <p class="fade-in-up delay-1">Connectez-vous avec votre compte Discord pour accéder à toutes les fonctionnalités de notre communauté.</p>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=134922352466136715&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2F&response_type=token&scope=identify%20email%20guilds" class="discord-login-btn fade-in-up delay-2">
+                <svg width="20" height="20" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+                </svg>
+                Se connecter avec Discord
+            </a>
+        </div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialiser Stripe avec la clé publique
+            const stripe = Stripe('pk_test_51R1jZDQSLWQDrXWEW9EI5TclUsbJC2jfiDdWmndmWVWDQdv2vb34QBsn8m5Y0mdcri45bTBffc876cKdofycfVNr009wZDPOtU');
+            const elements = stripe.elements();
+
+            // Fonctions pour le modal d'erreur
+            window.showErrorModal = function(message) {
+                const modal = document.getElementById('errorModal');
+                const messageEl = document.getElementById('errorModalMessage');
+                messageEl.textContent = message;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Empêcher le défilement
+            };
+
+            window.closeErrorModal = function() {
+                const modal = document.getElementById('errorModal');
+                modal.style.display = 'none';
+                document.body.style.overflow = ''; // Rétablir le défilement
+            };
+
+            // Fermer le modal si on clique en dehors
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('errorModal');
+                if (e.target === modal) {
+                    closeErrorModal();
+                }
+            });
+
+            // Connexion Discord
+            const connectBtn = document.getElementById('connect-btn');
+            const discordLogin = document.getElementById('discord-login');
+            const discordLoginClose = document.getElementById('discord-login-close');
+            
+            if (connectBtn && discordLogin && discordLoginClose) {
+                connectBtn.addEventListener('click', () => {
+                    discordLogin.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                discordLoginClose.addEventListener('click', () => {
+                    discordLogin.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+
+            // Créer un élément de carte Stripe avec des styles améliorés
+            const cardElement = elements.create('card', {
+                style: {
+                    base: {
+                        color: '#ffffff',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                        fontSize: '16px',
+                        fontSmoothing: 'antialiased',
+                        '::placeholder': {
+                            color: '#aab7c4'
+                        },
+                        iconColor: '#7c5cff'
+                    },
+                    invalid: {
+                        color: '#ff5555',
+                        iconColor: '#ff5555'
+                    }
+                },
+                hidePostalCode: true // Ne pas demander le code postal
+            });
+
+            // Monter immédiatement l'élément de carte s'il est visible
+            const cardFormElement = document.getElementById('card-form');
+            if (cardFormElement.classList.contains('active')) {
+                cardElement.mount('#card-element');
+            }
+
+            // Observer les changements de classe pour monter l'élément quand nécessaire
+            const cardFormObserver = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    if (mutation.attributeName === 'class') {
+                        if (cardFormElement.classList.contains('active')) {
+                            try {
+                                // Vérifier si l'élément est déjà monté
+                                if (!document.querySelector('.stripe-mounted')) {
+                                    cardElement.mount('#card-element');
+                                    document.querySelector('#card-element').classList.add('stripe-mounted');
+                                }
+                            } catch (err) {
+                                console.error('Erreur lors du montage de l\'élément de carte:', err);
+                                document.getElementById('card-errors').textContent = 
+                                    'Erreur lors du chargement du formulaire de carte. Veuillez rafraîchir la page.';
+                            }
+                        }
+                    }
+                });
+            });
+            
+            cardFormObserver.observe(cardFormElement, { 
+                attributes: true, 
+                attributeFilter: ['class'] 
+            });
+
+            // Gérer les erreurs de validation de carte avec messages en français
+            cardElement.addEventListener('change', ({error}) => {
+                const displayError = document.getElementById('card-errors');
+                if (error) {
+                    // Traduction des messages d'erreur courants
+                    let errorMessage = error.message;
+                    if (error.code === 'incomplete_number') {
+                        errorMessage = 'Le numéro de carte est incomplet.';
+                    } else if (error.code === 'invalid_number') {
+                        errorMessage = 'Le numéro de carte n\'est pas valide.';
+                    } else if (error.code === 'incomplete_expiry') {
+                        errorMessage = 'La date d\'expiration est incomplète.';
+                    } else if (error.code === 'invalid_expiry_month') {
+                        errorMessage = 'Le mois d\'expiration n\'est pas valide.';
+                    } else if (error.code === 'invalid_expiry_year') {
+                        errorMessage = 'L\'année d\'expiration n\'est pas valide.';
+                    } else if (error.code === 'incomplete_cvc') {
+                        errorMessage = 'Le code de sécurité (CVV) est incomplet.';
+                    } else if (error.code === 'invalid_cvc') {
+                        errorMessage = 'Le code de sécurité (CVV) n\'est pas valide.';
+                    }
+                    
+                    displayError.textContent = errorMessage;
+                } else {
+                    displayError.textContent = '';
+                }
+            });
+
+            // Get URL parameters to display the selected tier
+            const urlParams = new URLSearchParams(window.location.search);
+            const tier = urlParams.get('tier');
+            const price = urlParams.get('price');
+
+            if (tier) {
+                document.getElementById('selected-tier').textContent = tier;
+            }
+            
+            if (price) {
+                document.getElementById('selected-price').textContent = price + '€';
+            }
+
+            // Payment method selection
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const paymentForms = document.querySelectorAll('.payment-form-section');
+            
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', () => {
+                    // Remove active class from all methods and forms
+                    paymentMethods.forEach(m => m.classList.remove('active'));
+                    paymentForms.forEach(f => f.classList.remove('active'));
+                    
+                    // Add active class to clicked method and corresponding form
+                    method.classList.add('active');
+                    const formType = method.getAttribute('data-method');
+                    document.getElementById(`${formType}-form`).classList.add('active');
+                    
+                    // Update pay button text
+                    const payButtons = document.querySelectorAll('.pay-btn');
+                    payButtons.forEach(btn => {
+                        if (formType === 'card') {
+                            btn.textContent = 'Payer avec Stripe';
+                        } else if (formType === 'paypal') {
+                            btn.textContent = 'Payer avec PayPal';
+                        }
+                    });
+                });
+            });
+
+            // Form submission logic
+            const cardPaymentForm = document.getElementById('card-payment-form');
+            const paypalForm = document.getElementById('paypal-payment-form');
+            
+            cardPaymentForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                
+                // Désactiver le bouton pendant le traitement
+                const submitButton = cardPaymentForm.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Traitement en cours...';
+                
+                try {
+                    // Dans une application réelle, vous feriez une requête à votre serveur
+                    // pour créer une intention de paiement et obtenir un clientSecret
+                    const clientSecret = await fetchPaymentIntentClientSecret();
+                    
+                    // Confirmer le paiement avec Stripe
+                    const result = await stripe.confirmCardPayment(clientSecret, {
+                        payment_method: {
+                            card: cardElement,
+                            billing_details: {
+                                name: name,
+                                email: email
+                            }
+                        }
+                    });
+                    
+                    if (result.error) {
+                        // Afficher l'erreur à l'utilisateur
+                        const errorElement = document.getElementById('card-errors');
+                        
+                        // Traduction des messages d'erreur Stripe courants
+                        let errorMessage = result.error.message;
+                        
+                        // Messages d'erreur généraux
+                        if (errorMessage.includes('Your card was declined')) {
+                            errorMessage = 'Votre carte a été refusée. Veuillez vérifier les informations de votre carte ou utiliser une autre carte.';
+                        } else if (errorMessage.includes('Your card has expired')) {
+                            errorMessage = 'Votre carte a expiré. Veuillez utiliser une autre carte.';
+                        } else if (errorMessage.includes('Your card does not support this type of purchase')) {
+                            errorMessage = 'Votre carte ne prend pas en charge ce type d\'achat. Veuillez utiliser une autre carte.';
+                        } else if (errorMessage.includes('Your card has insufficient funds')) {
+                            errorMessage = 'Votre carte dispose de fonds insuffisants. Veuillez utiliser une autre carte.';
+                        } else if (errorMessage.includes('An error occurred while processing your card')) {
+                            errorMessage = 'Une erreur s\'est produite lors du traitement de votre carte. Veuillez réessayer.';
+                        } else if (errorMessage.includes('This page is no longer valid')) {
+                            errorMessage = 'Cette page n\'est plus valide. Veuillez rafraîchir et réessayer.';
+                        } else if (errorMessage.includes('Something went wrong')) {
+                            errorMessage = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+                        } else if (errorMessage.includes('Could not find payment information')) {
+                            errorMessage = 'Impossible de trouver les informations de paiement. Veuillez réessayer.';
+                        } else if (errorMessage.includes('No such payment')) {
+                            errorMessage = 'Ce paiement n\'existe pas. Veuillez réessayer.';
+                        } else {
+                            // Message d'erreur générique pour les autres cas
+                            errorMessage = 'Une erreur est survenue pendant le traitement du paiement. Veuillez vérifier les informations de votre carte et réessayer.';
+                        }
+                        
+                        errorElement.textContent = errorMessage;
+                        
+                        // Afficher le modal d'erreur personnalisé
+                        showErrorModal(errorMessage);
+                        
+                        // Réactiver le bouton
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Payer avec Stripe';
+                    } else {
+                        // Rediriger vers la page 3D Secure pour authentification
+                        const selectedPrice = document.getElementById('selected-price').textContent;
+                        const selectedTier = document.getElementById('selected-tier').textContent;
+                        window.location.href = `3d-secure.html?amount=${encodeURIComponent(selectedPrice)}&tier=${encodeURIComponent(selectedTier)}`;
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert(`Une erreur est survenue. Merci de réessayer.`);
+                    
+                    // Réactiver le bouton
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Payer avec Stripe';
+                }
+            });
+            
+            // Cette fonction récupère un clientSecret depuis le serveur
+            async function fetchPaymentIntentClientSecret() {
+                try {
+                    const selectedPrice = document.getElementById('selected-price').textContent;
+                    const selectedTier = document.getElementById('selected-tier').textContent;
+                    
+                    // Extraire le montant du prix affiché (par exemple "9.99€" -> 9.99)
+                    const amount = parseFloat(selectedPrice.replace('€', ''));
+                    
+                    if (isNaN(amount) || amount <= 0) {
+                        throw new Error('Montant invalide');
+                    }
+                    
+                    const response = await fetch('/create-payment-intent', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            amount: amount,
+                            currency: 'eur',
+                            tier: selectedTier
+                        }),
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de la création de l\'intention de paiement');
+                    }
+                    
+                    const data = await response.json();
+                    return data.clientSecret;
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    throw error;
+                }
+            }
+            
+            paypalForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert(`Redirection vers PayPal pour le paiement du forfait ${tier || 'Standard'} à ${price || '9.99'}€`);
+                // Dans une application réelle, vous redirigeriez vers PayPal ici
+            });
+        });
+    </script>
+</body>
+</html>

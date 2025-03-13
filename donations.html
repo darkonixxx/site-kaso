@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soutenir - Kaso</title>
+    <style>
+        :root {
+            --bg-color: #0d0a14;
+            --text-color: #ffffff;
+            --accent-color: #7c5cff;
+            --secondary-bg: #141020;
+            --button-color: #7c5cff;
+            --button-text: #ffffff;
+            --hover-color: #9879ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(124, 92, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .connect-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .connect-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 6rem 2rem 3rem;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .page-header p {
+            color: #b8b8b8;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .donation-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .donation-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .donation-tier {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donation-tier::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124, 92, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .donation-tier:hover::before {
+            left: 100%;
+        }
+
+        .donation-tier:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(124, 92, 255, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .tier-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .tier-benefits {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .tier-benefits li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tier-benefits li::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .donate-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .donate-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .payment-methods {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .payment-methods h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .payment-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .payment-icon:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .payment-icon img {
+            max-width: 50px;
+            max-height: 50px;
+        }
+
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid #333;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .donation-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .discord-login {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .discord-login-card {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 400px;
+            text-align: center;
+        }
+
+        .discord-login-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .discord-logo {
+            margin-bottom: 1rem;
+        }
+
+        .discord-login-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .discord-login-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .fade-in-down {
+            animation: fadeInDown 0.5s;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s;
+        }
+
+        .delay-1 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-2 {
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-text">Kaso</span>
+        </div>
+        <div class="nav-links">
+            <a href="kaso-final.html">Home</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html" class="active">Soutenir</a>
+        </div>
+        <button class="connect-btn" id="connect-btn">
+            <svg width="20" height="20" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="black"/>
+            </svg>
+            Se connecter
+        </button>
+    </nav>
+
+    <header class="page-header">
+        <h1>Soutenez Kaso</h1>
+        <p>Votre soutien nous aide à maintenir et améliorer notre communauté. Choisissez l'option qui vous convient le mieux.</p>
+    </header>
+
+    <div class="donation-container">
+        <div class="donation-options">
+            <div class="donation-tier">
+                <h3 class="tier-name">Standard</h3>
+                <div class="tier-price">5€ / mois</div>
+                <ul class="tier-benefits">
+                    <li>Badge spécial sur le serveur</li>
+                    <li>Accès au salon VIP</li>
+                    <li>Rôle exclusif sur Discord</li>
+                </ul>
+                <button class="donate-btn">Choisir Standard</button>
+            </div>
+
+            <div class="donation-tier">
+                <h3 class="tier-name">Premium</h3>
+                <div class="tier-price">10€ / mois</div>
+                <ul class="tier-benefits">
+                    <li>Tous les avantages Standard</li>
+                    <li>Priorité dans le support</li>
+                    <li>Accès aux événements exclusifs</li>
+                    <li>Emojis personnalisés</li>
+                </ul>
+                <button class="donate-btn">Choisir Premium</button>
+            </div>
+
+            <div class="donation-tier">
+                <h3 class="tier-name">Elite</h3>
+                <div class="tier-price">20€ / mois</div>
+                <ul class="tier-benefits">
+                    <li>Tous les avantages Premium</li>
+                    <li>Accès anticipé aux nouvelles fonctionnalités</li>
+                    <li>Salon privé avec les administrateurs</li>
+                    <li>Badge personnalisé</li>
+                    <li>Possibilité de suggérer des fonctionnalités</li>
+                </ul>
+                <button class="donate-btn">Choisir Elite</button>
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <h2>Modes de Paiement Acceptés</h2>
+            <div class="payment-icons">
+                <div class="payment-icon">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4C2.89 4 2.01 4.89 2.01 6L2 18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z" fill="#ffffff"/>
+                    </svg>
+                </div>
+                <div class="payment-icon">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM9.97 9.47C9.97 10.2 9.31 10.69 8.37 10.69H7.25V8.3H8.4C9.31 8.3 9.97 8.76 9.97 9.47ZM8.55 11.24C9.77 11.24 10.66 10.85 11.19 10.15C11.61 9.58 11.84 8.85 11.84 8C11.84 7.15 11.59 6.39 11.11 5.79C10.46 5.04 9.49 4.62 8.3 4.62H5.32V15.38H7.25V11.24H8.55ZM16.69 11.42C16.69 12.8 15.63 13.83 14.22 13.83C12.83 13.83 11.75 12.8 11.75 11.42C11.75 10.04 12.81 9 14.22 9C15.62 9 16.69 10.04 16.69 11.42ZM18.61 11.42C18.61 9.05 16.71 7.12 14.22 7.12C11.74 7.12 9.83 9.05 9.83 11.42C9.83 13.79 11.74 15.72 14.22 15.72C16.71 15.72 18.61 13.8 18.61 11.42ZM17.12 16.93C16.5 16.93 15.1 17.05 14.22 17.66C13.33 17.05 11.94 16.93 11.32 16.93C9.82 16.93 6.94 17.69 6.94 19.1V19.38H17.12C18.62 19.38 21.5 18.62 21.5 17.21V16.93C21.5 16.93 18.62 16.93 17.12 16.93Z" fill="#ffffff"/>
+                    </svg>
+                </div>
+                <div class="payment-icon">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.5 3.5L18 2L16.5 3.5L15 2L13.5 3.5L12 2L10.5 3.5L9 2L7.5 3.5L6 2V16H3V19C3 20.66 4.34 22 6 22H18C19.66 22 21 20.66 21 19V2L19.5 3.5ZM15 20H6C5.45 20 5 19.55 5 19V18H15V20ZM19 19C19 19.55 18.55 20 18 20C17.45 20 17 19.55 17 19V18H18V16H8V5H19V19Z" fill="#ffffff"/>
+                    </svg>
+                </div>
+                <div class="payment-icon">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM11.5 7H13V12.25L17.53 14.94L16.53 16.61L11.5 13.5V7Z" fill="#ffffff"/>
+                    </svg>
+                </div>
+            </div>
+            <p>Nous acceptons les cartes de crédit, PayPal, les virements bancaires et les cryptomonnaies.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+            <a href="conditions.html">Conditions d'utilisation</a>
+            <a href="confidentialite.html">Confidentialité</a>
+        </div>
+        <p class="copyright"> 2025 Kaso. Tous droits réservés.</p>
+    </footer>
+
+    <div class="discord-login" id="discord-login">
+        <div class="discord-login-card">
+            <button class="discord-login-close" id="discord-login-close">×</button>
+            <svg class="discord-logo" width="80" height="80" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="#5865F2"/>
+            </svg>
+            <h2 class="fade-in-down">Connexion avec Discord</h2>
+            <p class="fade-in-up delay-1">Connectez-vous avec votre compte Discord pour accéder à toutes les fonctionnalités de notre communauté.</p>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=134922352466136715&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2F&response_type=token&scope=identify%20email%20guilds" class="discord-login-btn fade-in-up delay-2">
+                <svg width="20" height="20" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+                </svg>
+                Se connecter avec Discord
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Button hover effects
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    button.style.transform = 'scale(1.05)';
+                    button.style.transition = 'all 0.3s';
+                });
+                
+                button.addEventListener('mouseout', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+
+            // Support button functionality
+            const donateButtons = document.querySelectorAll('.donate-btn');
+            donateButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tierElement = this.closest('.donation-tier').querySelector('.tier-name');
+                    const priceElement = this.closest('.donation-tier').querySelector('.tier-price');
+                    
+                    // Get the tier name and price
+                    const tier = tierElement.textContent;
+                    const price = priceElement.textContent;
+                    
+                    // Redirect to payment page with parameters
+                    window.location.href = `payment.html?tier=${encodeURIComponent(tier)}&price=${encodeURIComponent(price)}`;
+                });
+            });
+
+            // Discord login button functionality
+            const connectButton = document.getElementById('connect-btn');
+            const discordLogin = document.getElementById('discord-login');
+            const discordLoginClose = document.getElementById('discord-login-close');
+
+            connectButton.addEventListener('click', () => {
+                discordLogin.style.display = 'flex';
+            });
+
+            discordLoginClose.addEventListener('click', () => {
+                discordLogin.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

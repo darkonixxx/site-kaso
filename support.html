@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Kaso</title>
+    <style>
+        :root {
+            --bg-color: #0d0a14;
+            --text-color: #ffffff;
+            --accent-color: #7c5cff;
+            --secondary-bg: #141020;
+            --button-color: #7c5cff;
+            --button-text: #ffffff;
+            --hover-color: #9879ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(124, 92, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .connect-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+        
+        .connect-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .page-header p {
+            color: #b8b8b8;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .support-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .support-options, .faq-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .support-card {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 92, 255, 0.1), transparent 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s ease;
+        }
+        
+        .support-card:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(124, 92, 255, 0.2);
+        }
+
+        .discord-card {
+            text-align: center;
+        }
+
+        .discord-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .discord-link {
+            display: inline-block;
+            background-color: #5865F2;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .discord-link::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(124, 92, 255, 0), rgba(124, 92, 255, 0.4));
+            z-index: -1;
+            transition: all 0.3s ease;
+            transform: translateX(-100%);
+        }
+        
+        .discord-link:hover::after {
+            transform: translateX(0);
+        }
+
+        .discord-link:hover {
+            background-color: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(88, 101, 242, 0.5);
+        }
+
+        .discord-login-btn {
+            display: inline-block;
+            background-color: #5865F2;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .discord-login-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(124, 92, 255, 0), rgba(124, 92, 255, 0.4));
+            z-index: -1;
+            transition: all 0.3s ease;
+            transform: translateX(-100%);
+        }
+
+        .discord-login-btn:hover::after {
+            transform: translateX(0);
+        }
+
+        .discord-login-btn:hover {
+            background-color: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(88, 101, 242, 0.5);
+        }
+        
+        .discord-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .faq-item {
+            background-color: rgba(124, 92, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid rgba(124, 92, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .plus {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            display: none;
+            padding-top: 1rem;
+            color: #b8b8b8;
+            border-top: 1px solid rgba(124, 92, 255, 0.2);
+            margin-top: 1rem;
+        }
+        
+        .faq-answer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid #333;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #b8b8b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .support-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-text">Kaso</span>
+        </div>
+        <div class="nav-links">
+            <a href="kaso-final.html">Home</a>
+            <a href="support.html" class="active">Support</a>
+            <a href="donations.html">Soutenir</a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Support</h1>
+        <p>Besoin d'aide ? Nous sommes là pour vous. Choisissez l'option qui vous convient le mieux.</p>
+    </header>
+
+    <div class="support-container">
+        <div class="support-options">
+            <div class="support-card discord-card">
+                <h2>Rejoignez Notre Discord</h2>
+                <svg class="discord-logo" width="80" height="80" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+                </svg>
+                <p>Notre communauté Discord est l'endroit parfait pour poser vos questions, trouver de l'aide et discuter avec d'autres membres.</p>
+                <div class="discord-buttons">
+                    <a href="https://discord.gg/kaso" class="discord-link">Rejoindre Discord</a>
+                    <a href="https://discord.gg/kaso" class="discord-login-btn">Se connecter</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <div class="support-card">
+                <h2>Question</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment créer un compte ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour créer un compte, cliquez sur le bouton "Se connecter" en haut à droite de la page d'accueil, puis suivez les instructions pour vous inscrire avec votre adresse e-mail ou votre compte Discord.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quels sont les avantages des abonnements payants ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Les abonnements payants vous donnent accès à des fonctionnalités exclusives comme des badges spéciaux, des salons privés, un support prioritaire et bien plus encore. Pour plus de détails, consultez notre page <a href="donations.html">Soutenir</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment rejoindre le serveur Discord ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez rejoindre notre serveur Discord en cliquant sur le lien "Rejoindre Discord" ci-dessus ou en visitant <a href="https://discord.gg/kaso">discord.gg/kaso</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment annuler mon abonnement ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour annuler votre abonnement, connectez-vous à votre compte, allez dans "Paramètres" > "Abonnements" et cliquez sur "Annuler l'abonnement". Votre abonnement restera actif jusqu'à la fin de la période déjà payée.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Mes informations de paiement sont-elles sécurisées ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, nous utilisons Stripe et PayPal comme prestataires de paiement, qui sont reconnus pour leur sécurité. Nous ne stockons jamais vos informations de carte de crédit sur nos serveurs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment obtenir de l'aide supplémentaire ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si vous ne trouvez pas la réponse à votre question ici, rejoignez notre serveur Discord et posez votre question dans le salon #assistance. Nos modérateurs et la communauté seront ravis de vous aider.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+            <a href="#">Conditions d'utilisation</a>
+            <a href="#">Confidentialité</a>
+        </div>
+        <p class="copyright"> 2025 Kaso. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Button hover effects
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    button.style.transform = 'scale(1.05)';
+                    button.style.transition = 'transform 0.2s';
+                });
+                
+                button.addEventListener('mouseout', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+
+            // FAQ accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                question.addEventListener('click', () => {
+                    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                    question.querySelector('.plus').style.transform = question.querySelector('.plus').style.transform === 'rotate(45deg)' ? 'rotate(0deg)' : 'rotate(45deg)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

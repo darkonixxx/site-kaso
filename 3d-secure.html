@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification 3D Secure - Kaso</title>
+    <style>
+        :root {
+            --bg-color: #0d0a14;
+            --text-color: #ffffff;
+            --accent-color: #7c5cff;
+            --secondary-bg: #141020;
+            --button-color: #7c5cff;
+            --button-text: #ffffff;
+            --hover-color: #9879ff;
+            --bank-color: #0066cc;
+            --bank-secondary: #003366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(124, 92, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .secure-container {
+            max-width: 600px;
+            margin: 6rem auto 2rem;
+            padding: 2rem;
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .bank-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background-color: var(--bank-secondary);
+            padding: 1.5rem;
+            border-radius: 8px 8px 0 0;
+            margin: -2rem -2rem 1.5rem -2rem;
+            border-bottom: 3px solid var(--bank-color);
+        }
+
+        .bank-header h1 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .bank-logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .bank-logo svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--bank-color);
+        }
+
+        .secure-info {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px dashed rgba(124, 92, 255, 0.3);
+        }
+
+        .secure-info h2 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .transaction-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .transaction-details:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-label {
+            font-weight: bold;
+            color: #b8b8b8;
+        }
+
+        .transaction-value {
+            text-align: right;
+        }
+
+        .verification-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #b8b8b8;
+        }
+
+        .form-group input {
+            padding: 0.8rem;
+            border-radius: 4px;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            background-color: rgba(20, 16, 32, 0.6);
+            color: white;
+            font-family: inherit;
+        }
+
+        .secure-btn {
+            background-color: var(--bank-color);
+            color: var(--button-text);
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+        }
+
+        .secure-btn:hover {
+            background-color: #0077ee;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.5);
+        }
+
+        .cancel-btn {
+            background-color: transparent;
+            color: #b8b8b8;
+            border: 1px solid #b8b8b8;
+            padding: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .cancel-btn:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #b8b8b8;
+            font-size: 0.85rem;
+        }
+
+        .security-badge svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent-color);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(13, 10, 20, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(124, 92, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        .loading-text {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .timer-container {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #b8b8b8;
+        }
+
+        .timer {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="secure-container">
+        <div class="bank-header">
+            <div class="bank-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M11.5,1L2,6V8H21V6M16,10V17H19V10M2,22H21V19H2M10,10V17H13V10M4,10V17H7V10H4Z" />
+                </svg>
+            </div>
+            <h1>Vérification de paiement sécurisé</h1>
+            <p>Service d'authentification 3D Secure</p>
+        </div>
+
+        <div class="secure-info">
+            <h2>Détails de la transaction</h2>
+            <div class="transaction-details">
+                <span class="transaction-label">Marchand:</span>
+                <span class="transaction-value">Kaso Premium</span>
+            </div>
+            <div class="transaction-details">
+                <span class="transaction-label">Montant:</span>
+                <span class="transaction-value" id="transaction-amount">--,-- €</span>
+            </div>
+            <div class="transaction-details">
+                <span class="transaction-label">Date:</span>
+                <span class="transaction-value" id="transaction-date">--/--/----</span>
+            </div>
+            <div class="transaction-details">
+                <span class="transaction-label">Carte:</span>
+                <span class="transaction-value">****-****-****-<span id="card-last-digits">5678</span></span>
+            </div>
+        </div>
+
+        <form class="verification-form" id="secure-form">
+            <div class="form-group">
+                <label for="sms-code">Code de vérification reçu par SMS</label>
+                <input type="text" id="sms-code" placeholder="Entrez le code à 6 chiffres" maxlength="6" required>
+            </div>
+
+            <div class="timer-container">
+                <p>Temps restant pour la vérification: <span class="timer" id="countdown-timer">05:00</span></p>
+            </div>
+
+            <button type="submit" class="secure-btn">Valider le paiement</button>
+            <a href="payment.html" class="cancel-btn">Annuler et retourner au paiement</a>
+        </form>
+
+        <div class="security-badges">
+            <div class="security-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z" />
+                </svg>
+                <span>Connexion sécurisée</span>
+            </div>
+            <div class="security-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M8.9,6C8.9,4.29 10.29,2.9 12,2.9C13.71,2.9 15.1,4.29 15.1,6V8H8.9V6M16,16H13V19H11V16H8V14H11V11H13V14H16V16Z" />
+                </svg>
+                <span>Cryptage 256-bit</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loader"></div>
+        <p class="loading-text">Vérification en cours...</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Récupérer les paramètres de l'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const amount = urlParams.get('amount') || '10€';
+            const tier = urlParams.get('tier') || 'Standard';
+            
+            // Afficher le montant de la transaction
+            document.getElementById('transaction-amount').textContent = amount;
+            
+            // Afficher la date actuelle
+            const now = new Date();
+            const formattedDate = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+            document.getElementById('transaction-date').textContent = formattedDate;
+            
+            // Générer les 4 derniers chiffres aléatoires
+            const lastDigits = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('card-last-digits').textContent = lastDigits;
+            
+            // Compteur de temps
+            let timeLeft = 300; // 5 minutes en secondes
+            const timerElement = document.getElementById('countdown-timer');
+            
+            const timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                
+                timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                
+                if (--timeLeft < 0) {
+                    clearInterval(timer);
+                    timerElement.textContent = '00:00';
+                    timerElement.style.color = 'red';
+                    
+                    // Rediriger vers la page de paiement après expiration
+                    setTimeout(() => {
+                        alert('Le temps imparti pour la vérification est écoulé. Veuillez réessayer.');
+                        window.location.href = 'payment.html';
+                    }, 1000);
+                }
+            }, 1000);
+            
+            // Soumission du formulaire
+            const secureForm = document.getElementById('secure-form');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            
+            secureForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const smsCode = document.getElementById('sms-code').value.trim();
+                
+                // Vérifier que le code SMS est bien renseigné
+                if (!smsCode || smsCode.length !== 6 || !/^\d+$/.test(smsCode)) {
+                    alert('Veuillez entrer un code de vérification à 6 chiffres.');
+                    return;
+                }
+                
+                // Afficher l'écran de chargement
+                loadingOverlay.style.display = 'flex';
+                
+                // Simuler une vérification
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    
+                    // Rediriger vers la page de succès
+                    window.location.href = `payment-success.html?tier=${encodeURIComponent(tier)}&amount=${encodeURIComponent(amount)}`;
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>

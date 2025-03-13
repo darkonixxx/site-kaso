@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Kaso</title>
+    <style>
+        :root {
+            --bg-color: #0d0a14;
+            --text-color: #ffffff;
+            --accent-color: #7c5cff;
+            --secondary-bg: #141020;
+            --button-color: #7c5cff;
+            --button-text: #ffffff;
+            --hover-color: #9879ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(124, 92, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: rgba(20, 16, 32, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .connect-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .connect-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 8rem 2rem 3rem;
+            position: relative;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-color), #a48fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #b8b8b8;
+        }
+
+        .faq-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .faq-section {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 92, 255, 0.1), transparent 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+
+        .faq-section:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .faq-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            color: var(--accent-color);
+        }
+
+        .faq-item {
+            background-color: rgba(124, 92, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid rgba(124, 92, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .plus {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            display: none;
+            padding-top: 1rem;
+            color: #b8b8b8;
+            border-top: 1px solid rgba(124, 92, 255, 0.2);
+            margin-top: 1rem;
+        }
+        
+        .faq-answer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: #b8b8b8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="kaso-final.html" class="logo">
+            <span>Kaso</span>
+        </a>
+        <div class="nav-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="donations.html">Soutenir</a>
+            <a href="support.html">Support</a>
+        </div>
+        <button class="connect-btn">
+            <svg width="20" height="20" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+            </svg>
+            Se connecter
+        </button>
+    </nav>
+
+    <header class="page-header">
+        <h1>Foire Aux Questions</h1>
+        <p>Vous trouverez ici les réponses aux questions les plus fréquemment posées à propos de Kaso.</p>
+    </header>
+
+    <div class="faq-container">
+        <div class="faq-grid">
+            <div class="faq-section">
+                <h2>À propos de Kaso</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Qu'est-ce que Kaso ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Kaso est une communauté gaming francophone dédiée aux joueurs de tous niveaux. Nous proposons un espace convivial pour discuter, jouer ensemble et partager votre passion pour les jeux vidéo.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment rejoindre la communauté ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez rejoindre notre communauté en vous inscrivant sur notre site et en rejoignant notre serveur Discord. C'est simple, rapide et totalement gratuit !</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quels jeux sont disponibles ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Notre communauté couvre une large variété de jeux, des FPS aux MMO en passant par les jeux de stratégie et les jeux indépendants. Nous avons des canaux dédiés aux jeux les plus populaires.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Abonnements & Soutien</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Est-ce que Kaso est gratuit ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, Kaso est entièrement gratuit ! Cependant, nous proposons des options d'abonnement premium pour ceux qui souhaitent soutenir la communauté et bénéficier d'avantages exclusifs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quels sont les avantages des abonnements ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nos abonnés bénéficient de badges exclusifs, l'accès à des salons privés, un support prioritaire, et bien d'autres avantages. Consultez notre page <a href="donations.html">Soutenir</a> pour plus de détails.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment annuler mon abonnement ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez annuler votre abonnement à tout moment depuis votre compte. Allez dans "Paramètres" > "Abonnements" et cliquez sur "Annuler". L'abonnement restera actif jusqu'à la fin de la période payée.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Discord & Communication</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment fonctionne le serveur Discord ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Notre serveur Discord est organisé en plusieurs catégories et canaux thématiques. Vous y trouverez des salons textuels pour discuter et des salons vocaux pour jouer ensemble ou simplement discuter.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Y a-t-il des règles à respecter ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, nous avons quelques règles simples pour maintenir une ambiance agréable : respect mutuel, pas de spam, pas de contenu inapproprié, et suivre les directives de Discord. Consultez le canal #règles pour plus de détails.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment contacter les modérateurs ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vous pouvez contacter nos modérateurs via le canal #assistance sur Discord ou en leur envoyant un message privé. Ils sont là pour vous aider et répondre à vos questions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Problèmes Techniques</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Je ne peux pas me connecter, que faire ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si vous rencontrez des problèmes de connexion, essayez de vider le cache de votre navigateur ou d'utiliser un navigateur différent. Si le problème persiste, contactez-nous sur Discord.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Mon micro ne fonctionne pas sur Discord</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Vérifiez les paramètres audio de Discord (icône d'engrenage > Voix et Vidéo) et assurez-vous que le bon microphone est sélectionné. Vérifiez aussi les permissions du navigateur si vous utilisez Discord Web.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment signaler un bug ?</h3>
+                        <span class="plus">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si vous trouvez un bug sur notre site ou notre serveur, veuillez le signaler dans le canal #bugs sur Discord. Décrivez précisément le problème et, si possible, incluez des captures d'écran.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="donations.html">Soutenir</a>
+            <a href="support.html">Support</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <div class="footer-text">
+            <p>&copy; 2025 Kaso Community. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // FAQ accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                question.addEventListener('click', () => {
+                    answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                    question.querySelector('.plus').style.transform = question.querySelector('.plus').style.transform === 'rotate(45deg)' ? 'rotate(0deg)' : 'rotate(45deg)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

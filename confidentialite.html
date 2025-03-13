@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de Confidentialité - Kaso</title>
+    <style>
+        :root {
+            --bg-color: #0d0a14;
+            --text-color: #ffffff;
+            --accent-color: #7c5cff;
+            --secondary-bg: #141020;
+            --button-color: #7c5cff;
+            --button-text: #ffffff;
+            --hover-color: #9879ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: radial-gradient(rgba(124, 92, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .connect-btn {
+            background-color: var(--button-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        }
+
+        .connect-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 92, 255, 0.5);
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 6rem auto 2rem;
+            padding: 2rem 3rem;
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(124, 92, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .content-header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .content-header p {
+            color: #b8b8b8;
+        }
+
+        .privacy-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .privacy-section h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(124, 92, 255, 0.3);
+        }
+
+        .privacy-section p, .privacy-section ul {
+            margin-bottom: 1rem;
+        }
+
+        .privacy-section ul {
+            padding-left: 1.5rem;
+        }
+
+        .privacy-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .date-updated {
+            text-align: center;
+            margin-top: 3rem;
+            color: #b8b8b8;
+            font-style: italic;
+        }
+
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(124, 92, 255, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            color: #b8b8b8;
+        }
+
+        .highlight-box {
+            background-color: rgba(124, 92, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(124, 92, 255, 0.2);
+        }
+
+        .highlight-box h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(124, 92, 255, 0.2);
+        }
+
+        th {
+            background-color: rgba(124, 92, 255, 0.1);
+            color: var(--accent-color);
+        }
+
+        tr:hover {
+            background-color: rgba(124, 92, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-text">Kaso</span>
+        </div>
+        <div class="nav-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+        </div>
+        <button class="connect-btn">
+            <svg width="20" height="20" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z" fill="white"/>
+            </svg>
+            Se connecter
+        </button>
+    </nav>
+
+    <div class="content-container">
+        <div class="content-header">
+            <h1>Politique de Confidentialité</h1>
+            <p>Kaso s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>1. Informations que nous collectons</h2>
+            <p>Nous pouvons collecter les types d'informations suivants :</p>
+            <ul>
+                <li><strong>Informations d'identification personnelle</strong> : nom, adresse e-mail, nom d'utilisateur Discord, identifiant Discord.</li>
+                <li><strong>Informations de transaction</strong> : détails de paiement, historique des transactions, abonnements.</li>
+                <li><strong>Informations d'utilisation</strong> : données sur votre interaction avec nos services, y compris les connexions, les messages et les participations aux événements.</li>
+                <li><strong>Informations techniques</strong> : adresse IP, type de navigateur, appareil utilisé, système d'exploitation, timestamps.</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2>2. Comment nous collectons vos informations</h2>
+            <p>Nous collectons vos informations par les moyens suivants :</p>
+            <ul>
+                <li><strong>Informations que vous nous fournissez</strong> : lorsque vous créez un compte, effectuez un paiement ou interagissez avec notre service.</li>
+                <li><strong>OAuth Discord</strong> : lorsque vous vous connectez via votre compte Discord, nous recevons les informations que vous avez autorisées Discord à partager avec nous.</li>
+                <li><strong>Utilisation du service</strong> : nous recueillons automatiquement certaines informations lorsque vous utilisez notre plateforme.</li>
+                <li><strong>Cookies et technologies similaires</strong> : pour améliorer votre expérience et collecter des données d'utilisation.</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <h3>Connexion via Discord</h3>
+                <p>Lorsque vous vous connectez via Discord, nous demandons l'accès à :</p>
+                <ul>
+                    <li>Votre identifiant Discord</li>
+                    <li>Votre nom d'utilisateur et discriminateur</li>
+                    <li>Votre avatar</li>
+                    <li>Votre adresse e-mail (si vous l'avez autorisé)</li>
+                </ul>
+                <p>Nous n'avons jamais accès à votre mot de passe Discord.</p>
+            </div>
+        </div>
+
+        <div class="privacy-section">
+            <h2>3. Comment nous utilisons vos informations</h2>
+            <p>Nous utilisons vos informations pour :</p>
+            <ul>
+                <li>Fournir, maintenir et améliorer nos services</li>
+                <li>Traiter vos transactions et gérer votre abonnement</li>
+                <li>Vous envoyer des communications relatives au service</li>
+                <li>Personnaliser votre expérience utilisateur</li>
+                <li>Analyser l'utilisation du service et améliorer nos offres</li>
+                <li>Détecter, prévenir et résoudre les problèmes techniques ou de sécurité</li>
+                <li>Se conformer aux obligations légales</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2>4. Partage de vos informations</h2>
+            <p>Nous ne vendons pas vos données personnelles. Nous partageons vos informations uniquement dans les circonstances suivantes :</p>
+            <ul>
+                <li><strong>Prestataires de services</strong> : nous travaillons avec des tiers qui nous aident à exploiter notre service (traitement des paiements, hébergement, analyse).</li>
+                <li><strong>Conformité légale</strong> : lorsque la loi nous y oblige ou en réponse à des procédures légales valides.</li>
+                <li><strong>Protection des droits</strong> : pour protéger nos droits, notre propriété ou notre sécurité, ou ceux de nos utilisateurs ou du public.</li>
+                <li><strong>Avec votre consentement</strong> : dans d'autres cas où nous avons votre permission explicite.</li>
+            </ul>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Catégorie de partenaires</th>
+                            <th>Type de données partagées</th>
+                            <th>Finalité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Prestataires de paiement (Stripe)</td>
+                            <td>Informations de transaction</td>
+                            <td>Traitement des paiements</td>
+                        </tr>
+                        <tr>
+                            <td>Services d'hébergement</td>
+                            <td>Données d'utilisation, contenu</td>
+                            <td>Hébergement du service</td>
+                        </tr>
+                        <tr>
+                            <td>Services d'analyse</td>
+                            <td>Données d'utilisation anonymisées</td>
+                            <td>Amélioration du service</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="privacy-section">
+            <h2>5. Sécurité de vos informations</h2>
+            <p>Nous prenons la sécurité de vos informations personnelles au sérieux et mettons en œuvre des mesures de sécurité techniques, administratives et physiques appropriées pour protéger vos informations personnelles contre la perte, le vol, l'accès non autorisé, la divulgation, l'altération et la destruction.</p>
+            <p>Cependant, aucune méthode de transmission sur Internet, ou méthode de stockage électronique n'est 100% sécurisée. Bien que nous nous efforcions d'utiliser des moyens commercialement acceptables pour protéger vos informations personnelles, nous ne pouvons garantir leur sécurité absolue.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>6. Conservation des données</h2>
+            <p>Nous conserverons vos informations personnelles aussi longtemps que nécessaire pour vous fournir nos services et atteindre les finalités décrites dans cette politique de confidentialité, sauf si une période de conservation plus longue est requise ou permise par la loi.</p>
+            <p>Si vous souhaitez supprimer votre compte, veuillez nous contacter. Veuillez noter que certaines informations peuvent être conservées même après la suppression de votre compte pour respecter nos obligations légales, résoudre des litiges et faire appliquer nos accords.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>7. Vos droits en matière de protection des données</h2>
+            <p>Selon votre lieu de résidence, vous pouvez disposer de certains droits concernant vos informations personnelles, notamment :</p>
+            <ul>
+                <li>Le droit d'accéder à vos informations personnelles</li>
+                <li>Le droit de rectifier ou de mettre à jour vos informations inexactes ou incomplètes</li>
+                <li>Le droit de supprimer vos informations personnelles</li>
+                <li>Le droit de restreindre le traitement de vos informations personnelles</li>
+                <li>Le droit à la portabilité des données</li>
+                <li>Le droit de vous opposer au traitement de vos informations personnelles</li>
+                <li>Le droit de retirer votre consentement</li>
+            </ul>
+            <p>Pour exercer ces droits, veuillez nous contacter à l'adresse indiquée ci-dessous.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>8. Cookies et technologies similaires</h2>
+            <p>Nous utilisons des cookies et des technologies similaires pour améliorer votre expérience, analyser le trafic et personnaliser le contenu.</p>
+            <p>Les types de cookies que nous utilisons incluent :</p>
+            <ul>
+                <li><strong>Cookies essentiels</strong> : nécessaires au fonctionnement de notre site web.</li>
+                <li><strong>Cookies de préférences</strong> : permettent à notre site web de se souvenir de vos préférences.</li>
+                <li><strong>Cookies statistiques</strong> : nous aident à comprendre comment les visiteurs interagissent avec notre site web.</li>
+                <li><strong>Cookies marketing</strong> : utilisés pour suivre les visiteurs sur les sites web.</li>
+            </ul>
+            <p>Vous pouvez configurer votre navigateur pour refuser tous les cookies ou pour indiquer quand un cookie est envoyé. Toutefois, certaines fonctionnalités de notre service peuvent ne pas fonctionner correctement si les cookies sont désactivés.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>9. Modifications de la politique de confidentialité</h2>
+            <p>Nous pouvons mettre à jour notre politique de confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle politique de confidentialité sur cette page et en mettant à jour la date de "dernière mise à jour".</p>
+            <p>Nous vous encourageons à consulter régulièrement cette politique de confidentialité pour prendre connaissance des éventuelles modifications.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>10. Nous contacter</h2>
+            <p>Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter :</p>
+            <ul>
+                <li>Par email : privacy@kaso.fr</li>
+                <li>Par courrier : Kaso, 123 Avenue de la République, 75011 Paris, France</li>
+            </ul>
+        </div>
+
+        <div class="date-updated">
+            Dernière mise à jour : 12 mars 2025
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="kaso-final.html">Accueil</a>
+            <a href="support.html">Support</a>
+            <a href="donations.html">Soutenir</a>
+            <a href="conditions.html">Conditions d'utilisation</a>
+            <a href="confidentialite.html">Confidentialité</a>
+        </div>
+        <p class="copyright">&copy; 2025 Kaso. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Button hover effects
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    button.style.transform = 'scale(1.05)';
+                    button.style.transition = 'all 0.3s';
+                });
+                
+                button.addEventListener('mouseout', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
